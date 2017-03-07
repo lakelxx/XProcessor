@@ -1,0 +1,10 @@
+*.class
+*.tokens
+XPathBaseListener.java
+XPathBaseVisitor.java
+XPathLexer.java
+XPathParser.java
+XPathVisitor.java
+
+clear
+setup
