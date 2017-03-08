@@ -1,5 +1,8 @@
-# files in src folder
+# files
+src/.DS_Store
+src/.DS_Store
 .DS_Store
+XProfessor.iml
 *.class
 *.tokens
 XPathBaseListener.java
