@@ -10,7 +10,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public class EvalXPath extends XPathBaseVisitor<List<Node>>  implements XPathHelper {
+public class EvalXPath extends XPathBaseVisitor<List<Node>> {
 
     /*******************************************************************************************************************/
     /*******************************************Implementation of XPathHelper*******************************************/
@@ -136,6 +136,7 @@ public class EvalXPath extends XPathBaseVisitor<List<Node>>  implements XPathHel
 
     public List<Node> visitAp1(XPathParser.Ap1Context ctx) {
         String fileName = ctx.FILENAME().getText();
+        fileName = fileName.substring(1, fileName.length()-1);
         Node root = ROOT(fileName);
         List<Node> nList = RELATIVE(ctx.rp(), root);
         return nList;
@@ -143,8 +144,9 @@ public class EvalXPath extends XPathBaseVisitor<List<Node>>  implements XPathHel
 
     public List<Node> visitAp2(XPathParser.Ap2Context ctx) {
         String fileName = ctx.FILENAME().getText();
+        fileName = fileName.substring(1, fileName.length()-1);
         Node root = ROOT(fileName);
-        List<Node> nList = RELATIVE(ctx.rp(), root);
+        List<Node> nList = visitRpSlash2(new XPathParser.RpDot1Context(new XPathParser.RpContext()), ctx.rp(), root);
         return nList;
     }
 

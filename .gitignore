@@ -12,9 +12,17 @@ XPathListener.java
 XPathParser.java
 XPathVisitor.java
 
+XQueryBaseListener.java
+XQueryBaseVisitor.java
+XQueryLexer.java
+XQueryListener.java
+XQueryParser.java
+XQueryVisitor.java
+
 # folder
 .idea/
+out/
 
 # scripts
-clear
 setup
+reset
