@@ -2,7 +2,7 @@ grammar XQuery;
 import XPath;
 
 xq          :    var                                                 # xqVar
-            |    SC                                                  # xqSc
+            |    sConstant                                           # xqSc
             |    ap                                                  # xqAp
             |    '(' xq ')'                                          # xqParens
             |    xq ',' xq                                           # xqComma
@@ -13,20 +13,13 @@ xq          :    var                                                 # xqVar
             |    letClause xq                                        # xqLet
             ;
 
-var         :    '$' NAME
-            ;
+forClause   :    'for' var 'in' xq (',' var 'in' xq)*;
 
-forClause   :    'for' var 'in' xq (',' var 'in' xq)*
-            ;
+letClause   :    'let' var ':=' xq (',' var ':=' xq)*;
 
-letClause   :    'let' var ':=' xq (',' var ':=' xq)*
-            ;
+whereClause :    'where' cond;
 
-whereClause :    'where' cond
-            ;
-
-returnClause:    'return' xq
-            ;
+returnClause:    'return' xq;
 
 cond        :    xq '=' xq                                           # condEq
             |    xq 'eq' xq                                          # condEq
@@ -40,4 +33,4 @@ cond        :    xq '=' xq                                           # condEq
             |    NOT cond                                            # condNot
             ;
 
-SC          :    '"' NAME '"';
+var         :    '$' NAME;

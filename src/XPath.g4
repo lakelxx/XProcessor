@@ -1,8 +1,9 @@
 grammar XPath;
 
-ap          :    DOC '(' FILENAME ')''/'rp                  # ap1
-            |    DOC '(' FILENAME ')''//'rp                 # ap2
+ap          :    DOC '(' sConstant ')' '/' rp               # ap1
+            |    DOC '(' sConstant ')' '//' rp              # ap2
             ;
+
 rp          :    NAME                                       # rpTag
             |    '*'                                        # rpStar
             |    '.'                                        # rpDot1
@@ -26,6 +27,8 @@ filter      :    rp                                         # ftRp
             |    NOT filter                                 # ftNot
             ;
 
+sConstant   :    '"' NAME '"';
+
 DOC         :    'doc'
             |    'document'
             ;
@@ -38,6 +41,8 @@ OR          :    'or'
 NOT         :    'not'
             |    'NOT'
             ;
-FILENAME    :    '"' NAME '"';
+
 NAME        :    [a-zA-Z0-9._]+ ;
+
 WS          :    [ \t\r\n]+ -> skip;
+

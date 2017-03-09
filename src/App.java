@@ -15,8 +15,8 @@ public class App {
             XPathParser parser = new XPathParser(tokens);
             parser.removeErrorListeners();
             ParseTree tree = parser.ap();
-            EvalXPath evalpath = new EvalXPath();
-            List<Node> ret = evalpath.visit(tree);
+            EvalXPath myXPath = new EvalXPath();
+            List<Node> ret = myXPath.visit(tree);
             for(Node n : ret) {
                 System.out.println("ret name: " + n.getNodeName() + " " + "ret txt  " + n.getTextContent());
             }
