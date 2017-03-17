@@ -44,5 +44,5 @@ NOT         :    'not'
 
 NAME        :    [a-zA-Z0-9._]+ ;
 
-WS          :    [ \t\r\n]+ -> skip;
+WS          :    [\t\r\n]+ -> skip;
 

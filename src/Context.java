@@ -1,18 +1,19 @@
 import org.w3c.dom.Node;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Context {
 
-    private Map<String, List<Node>> context;
+    private Map<XQueryParser.VarContext, List<Node>> context;
 
     public Context() {
         context = new HashMap<>();
     }
 
-    public Map<String, List<Node>>  assign(String var, List<Node> v) {
+    public Map<XQueryParser.VarContext, List<Node>> assign(XQueryParser.VarContext var, List<Node> v) {
         context.put(var, v);
         return context;
     }
@@ -20,4 +21,5 @@ public class Context {
     public List<Node> getValue(String var) {
         return context.get(var);
     }
+
 }

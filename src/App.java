@@ -8,14 +8,24 @@ import java.util.List;
 public class App {
     public static void main(String[] args) {
         try {
-            String test = "doc(\"j_caesar.xml\")//(ACT,PERSONAE)/TITLE";
+            String test = "<acts> \n" +
+                    " {\tfor $a in doc(\"j_caesar.xml\")//ACT\n" +
+                    "where empty ( for $sp in $a/SCENE/SPEECH/SPEAKER\n" +
+                    " where $sp/text() = \"CASCA\" \n" +
+                    "   return <speaker> {$sp/text()}</speaker> \n" +
+                    "     )\n" +
+                    "\n" +
+                    "            return <act>{$a/TITLE/text()}</act>\n" +
+                    "\n" +
+                    "        }\n" +
+                    "</acts>";
             ANTLRInputStream input = new ANTLRInputStream(test);
-            XPathLexer lexer = new XPathLexer(input);
+            XQueryLexer lexer = new XQueryLexer(input);
             CommonTokenStream tokens = new CommonTokenStream(lexer);
-            XPathParser parser = new XPathParser(tokens);
+            XQueryParser parser = new XQueryParser(tokens);
             parser.removeErrorListeners();
-            ParseTree tree = parser.ap();
-            EvalXPath myXPath = new EvalXPath();
+            ParseTree tree = parser.xq();
+            EvalXQuery myXPath = new EvalXQuery();
             List<Node> ret = myXPath.visit(tree);
             for(Node n : ret) {
                 System.out.println("ret name: " + n.getNodeName() + " " + "ret txt  " + n.getTextContent());
